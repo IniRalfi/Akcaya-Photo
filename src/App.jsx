@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react'; // <-- Import useState
 import { Routes, Route } from 'react-router-dom';
-
-import './App.css'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -9,14 +7,17 @@ import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 
 function App() {
+  // State untuk melacak section mana yang sedang aktif
+  const [activeSection, setActiveSection] = useState('');
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      {/* Kirim state 'activeSection' ke Navbar */}
+      <Navbar activeSection={activeSection} />
 
-      {/* 3. Beri 'flex-grow' agar konten mengisi ruang kosong */}
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage setActiveSection={setActiveSection} />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
@@ -27,4 +28,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

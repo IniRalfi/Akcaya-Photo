@@ -4,7 +4,6 @@ const founders = [
     {
         name: 'Rafli Pratama',
         role: 'Co-Founder',
-        // TODO: Ganti dengan path foto asli Anda
         imageUrl: 'https://i.pravatar.cc/150?u=rafli',
     },
     {
@@ -82,8 +81,6 @@ function About() {
                         Tim Pendiri Akcaya Photo
                     </h3>
 
-                    {/* Grid untuk kartu para founder */}
-                    {/* === PERUBAHAN UTAMA DI SINI === */}
                     <div className="flex flex-wrap gap-8 justify-center">
                         {founders.map((founder) => (
                             <div
@@ -100,7 +97,6 @@ function About() {
                             </div>
                         ))}
                     </div>
-                    {/* "Dummy div" tidak diperlukan lagi */}
                 </div>
 
             </div>

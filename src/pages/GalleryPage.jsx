@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PhotoCard from '../components/PhotoCard'; // Import komponen kartu yang sudah kita buat
-import Papa from 'papaparse'; // <-- 1. IMPORT PAPA PARSE
+import PhotoCard from '../components/PhotoCard';
+import Papa from 'papaparse';
+import PhotoDetailModal from '../components/PhotoDetailModal';
 
 function GalleryPage() {
     // State untuk menyimpan daftar foto, status loading, dan kemungkinan error
@@ -8,11 +9,11 @@ function GalleryPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // useEffect akan berjalan satu kali setelah komponen pertama kali di-render
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
+
     useEffect(() => {
         // FUNGSI UNTUK MENGAMBIL DAN MEM-PARSING DATA CSV
         const fetchPhotos = async () => {
-            // !!! PENTING: Ganti URL di bawah ini dengan URL CSV dari Google Sheet Anda !!!
             const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQAIoVOxRdAFoJRG7WWac1KV-BuPm1OxwmA2ogt8vaHUhGZIZDZItNS29oUo-u9ORrt_VsLFuE7tq0a/pub?output=csv';
 
             try {
@@ -23,9 +24,8 @@ function GalleryPage() {
                 const csvText = await response.text();
 
                 Papa.parse(csvText, {
-                    header: true, // Ini kuncinya! Otomatis baca header sebagai nama properti
+                    header: true,
                     complete: (results) => {
-                        // Mengubah nama properti agar konsisten (misal: "Judul Foto" -> "judul_foto")
                         const formattedData = results.data.map(row => {
                             const newRow = {};
                             for (const key in row) {
@@ -48,6 +48,14 @@ function GalleryPage() {
 
         fetchPhotos();
     }, []);
+
+    const handlePhotoClick = (photo) => {
+        setSelectedPhoto(photo);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedPhoto(null);
+    };
 
     // Tampilan kondisional berdasarkan status
     if (loading) {
@@ -74,12 +82,18 @@ function GalleryPage() {
                         <PhotoCard
                             key={index} // Sebaiknya gunakan ID unik jika ada, jika tidak index bisa dipakai
                             photo={photo}
-                        // onClick={() => handlePhotoClick(photo)} // Ini akan kita tambahkan di Tugas 4
+                            onClick={() => handlePhotoClick(photo)}
                         />
                     ))}
                 </div>
-
             </div>
+
+            {selectedPhoto && (
+                <PhotoDetailModal
+                    photo={selectedPhoto}
+                    onClose={handleCloseModal}
+                />
+            )}
         </div>
     );
 }

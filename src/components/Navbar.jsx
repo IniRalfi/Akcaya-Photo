@@ -1,23 +1,34 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import logo from '../assets/logo.png';
 
-function Navbar() {
+function Navbar({ activeSection }) {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation(); // Hook untuk mendapatkan info lokasi saat ini
 
+    // === PERBAIKAN 1: TAMBAHKAN 'id' PADA SETIAP LINK ===
     const navLinks = [
-        { to: '/', label: 'Home' },
-        { to: '/#about', label: 'About' },
-        { to: '/gallery', label: 'Gallery' },
-        { to: '/contact', label: 'Contact' },
+        { to: '/', label: 'Home', id: 'home' },
+        { to: '/#about', label: 'About', id: 'about' },
+        { to: '/gallery', label: 'Gallery', id: 'gallery' },
+        { to: '/contact', label: 'Contact', id: 'contact' },
     ];
+
+    const handleHomeClick = () => {
+        // Jika sudah di halaman utama, scroll ke atas. Jika tidak, NavLink akan handle navigasi.
+        if (location.pathname === '/') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Tutup menu mobile jika terbuka
+        setIsOpen(false);
+    };
 
     return (
         <nav className="sticky top-0 z-50 bg-transparent backdrop-blur-sm shadow-md">
             <div className="max-w-6xl mx-auto px-5 md:px-0">
                 <div className="flex items-center justify-between h-16">
-
                     <Link to="/" className="flex-shrink-0">
                         <img
                             src={logo}
@@ -27,24 +38,53 @@ function Navbar() {
                     </Link>
 
                     <div className="hidden md:flex items-center space-x-10">
-                        {navLinks.map((link) => (
-                            <NavLink
-                                key={link.label}
-                                to={link.to}
+                        {navLinks.map((link) => {
+                            const isHashLink = link.to.startsWith('/#');
 
-                                className={({ isActive }) =>
-                                    `font-semibold transition duration-300 text-sm tracking-wider ${isActive && link.to !== '/#about'
-                                        ? 'text-red-600' // Warna untuk link AKTIF
-                                        : 'text-slate-700 hover:text-red-600' // Warna untuk link NON-AKTIF dan saat HOVER
-                                    }`
-                                }
-                            >
-                                {link.label}
-                            </NavLink>
-                        ))}
+                            if (isHashLink) {
+                                return (
+                                    <HashLink
+                                        key={link.label}
+                                        to={link.to}
+                                        smooth
+                                        className={`font-semibold transition duration-300 text-sm tracking-wider ${activeSection === link.id ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
+                                            }`}
+                                    >
+                                        {link.label}
+                                    </HashLink>
+                                );
+                            }
+
+                            // Khusus untuk link "Home", tambahkan onClick
+                            if (link.id === 'home') {
+                                return (
+                                    <NavLink
+                                        key={link.label}
+                                        to={link.to}
+                                        onClick={handleHomeClick}
+                                        className={`font-semibold transition duration-300 text-sm tracking-wider ${activeSection === 'home' ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
+                                            }`}
+                                    >
+                                        {link.label}
+                                    </NavLink>
+                                )
+                            }
+
+                            return (
+                                <NavLink
+                                    key={link.label}
+                                    to={link.to}
+                                    className={({ isActive }) =>
+                                        `font-semibold transition duration-300 text-sm tracking-wider ${isActive ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
+                                        }`
+                                    }
+                                >
+                                    {link.label}
+                                </NavLink>
+                            );
+                        })}
                     </div>
 
-                    {/* Tombol Hamburger untuk Mobile (tidak ada perubahan di sini) */}
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -61,7 +101,6 @@ function Navbar() {
                 </div>
             </div>
 
-            {/* Menu untuk Mobile (tidak ada perubahan di sini) */}
             {isOpen && (
                 <div className="md:hidden pb-4 px-5">
                     {navLinks.map((link) => (
