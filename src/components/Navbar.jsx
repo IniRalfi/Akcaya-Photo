@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-import logo from '../assets/logo.png';
+import logo from '../assets/Logo.png';
 
 function Navbar({ activeSection }) {
     const [isOpen, setIsOpen] = useState(false);

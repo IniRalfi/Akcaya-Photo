@@ -2,7 +2,6 @@ import React from 'react';
 
 function ContactPage() {
     return (
-        // Kita beri padding atas yang cukup agar tidak terlalu mepet dengan header
         <div className="py-20 md:py-28">
             <div className="container mx-auto max-w-6xl px-5">
 
@@ -45,9 +44,6 @@ function ContactPage() {
 
                     {/* Kolom Kanan: Form */}
                     <div>
-                        {/* Perhatikan: tidak ada 'onSubmit' dengan 'event.preventDefault()'.
-              Ini akan membuat form otomatis me-refresh halaman saat disubmit, sesuai permintaan.
-            */}
                         {/* <form action="" method="GET" className="space-y-6">
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-slate-700">Nama Lengkap</label>
