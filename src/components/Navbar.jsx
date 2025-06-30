@@ -6,9 +6,9 @@ import logo from '../assets/logo.png';
 
 function Navbar({ activeSection }) {
     const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation(); // Hook untuk mendapatkan info lokasi saat ini
+    const location = useLocation();
 
-    // === PERBAIKAN 1: TAMBAHKAN 'id' PADA SETIAP LINK ===
+
     const navLinks = [
         { to: '/', label: 'Home', id: 'home' },
         { to: '/#about', label: 'About', id: 'about' },
@@ -17,11 +17,11 @@ function Navbar({ activeSection }) {
     ];
 
     const handleHomeClick = () => {
-        // Jika sudah di halaman utama, scroll ke atas. Jika tidak, NavLink akan handle navigasi.
+
         if (location.pathname === '/') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        // Tutup menu mobile jika terbuka
+
         setIsOpen(false);
     };
 
@@ -55,7 +55,7 @@ function Navbar({ activeSection }) {
                                 );
                             }
 
-                            // Khusus untuk link "Home", tambahkan onClick
+
                             if (link.id === 'home') {
                                 return (
                                     <NavLink
