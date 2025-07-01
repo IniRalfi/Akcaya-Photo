@@ -10,7 +10,7 @@ function Hero() {
         >
             {/* Container utama untuk membatasi lebar dan menengahkan konten */}
             <div className="container mx-auto max-w-6xl">
-                <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-96">
+                <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-16 md:gap-96">
 
                     {/* 1. Bagian Teks (di kiri) */}
                     <div className="md:flex-1 text-center md:text-left">
