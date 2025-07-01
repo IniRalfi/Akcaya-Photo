@@ -6,7 +6,7 @@ function Hero() {
 
         <section
             id="home"
-            className="w-full h-[calc(100vh-4rem)] flex items-center mt-10 md:mt-0 p-5 md:p-10"
+            className="w-full h-[calc(100vh-4rem)] flex items-center mt-0 p-5 md:p-10"
         >
             {/* Container utama untuk membatasi lebar dan menengahkan konten */}
             <div className="container mx-auto max-w-6xl">
