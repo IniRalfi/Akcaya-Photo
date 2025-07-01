@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer'; // <-- Import useInView
 import Home from '../components/Home';
 import About from '../components/About';
+import SEO from '../components/SEO';
 
 function HomePage({ setActiveSection }) {
     // Setup pengamat untuk section Home
@@ -26,6 +27,10 @@ function HomePage({ setActiveSection }) {
 
     return (
         <>
+            <SEO
+                title="Home"
+                description="Selamat datang di Akcaya Photo, komunitas fotografi dari Pontianak. Lihat karya dan cerita kami."
+            />
             <div ref={homeRef}>
                 <Home />
             </div>

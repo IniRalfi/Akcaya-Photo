@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PhotoCard from '../components/PhotoCard';
 import Papa from 'papaparse';
 import PhotoDetailModal from '../components/PhotoDetailModal';
+import SEO from '../components/SEO';
 
 function GalleryPage() {
 
@@ -68,6 +69,10 @@ function GalleryPage() {
 
     return (
         <div className="py-20 md:py-28">
+            <SEO
+                title="Galeri Karya"
+                description="Jelajahi galeri karya dari para anggota Akcaya Photo. Temukan berbagai momen, cerita, dan perspektif unik yang diabadikan melalui lensa kami."
+            />
             <div className="container mx-auto max-w-7xl px-5">
 
                 {/* Judul Halaman */}

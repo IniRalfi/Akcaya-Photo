@@ -1,8 +1,13 @@
 import React from 'react';
+import SEO from '../components/SEO';
 
 function ContactPage() {
     return (
         <div className="py-20 md:py-28">
+            <SEO
+                title="Hubungi Kami"
+                description="Punya pertanyaan, ide kolaborasi, atau ingin terhubung dengan komunitas Akcaya Photo? Hubungi kami melalui halaman ini."
+            />
             <div className="container mx-auto max-w-6xl px-5">
 
                 {/* Judul Halaman */}

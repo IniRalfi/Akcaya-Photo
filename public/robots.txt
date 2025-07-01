@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akcayaphoto.netlify.app/sitemap.xml
