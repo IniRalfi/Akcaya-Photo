@@ -16,13 +16,63 @@ function Navbar({ activeSection }) {
         { to: '/contact', label: 'Contact', id: 'contact' },
     ];
 
-    const handleHomeClick = () => {
+    const closeMobileMenu = () => setIsOpen(false);
 
+    const handleHomeClick = () => {
+        // Jika sudah di halaman utama, scroll ke atas
         if (location.pathname === '/') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        // Jika menu mobile terbuka, tutup
+        closeMobileMenu();
+    };
 
-        setIsOpen(false);
+    const renderLinks = () => {
+        return navLinks.map((link) => {
+            const isHashLink = link.to.startsWith('/#');
+
+            const getClassName = ({ isActive }) => {
+                const base = "font-semibold transition duration-300 text-sm tracking-wider";
+                const mobileBase = " block py-2 text-lg"; // Style tambahan khusus mobile
+                const active = "text-red-600";
+                const inactive = "text-slate-700 hover:text-red-600";
+
+                let isLinkActive = isActive;
+                // Jika di halaman utama, status aktif ditentukan oleh scroll
+                if (location.pathname === '/') {
+                    isLinkActive = activeSection === link.id;
+                }
+
+                return `${base} ${isLinkActive ? active : inactive}`;
+            };
+
+            // --- Logika untuk merender link ---
+            if (isHashLink) {
+                return (
+                    <HashLink
+                        key={link.label}
+                        to={link.to}
+                        smooth
+                        onClick={closeMobileMenu}
+                        className={getClassName({ isActive: false })}
+                    >
+                        {link.label}
+                    </HashLink>
+                );
+            }
+
+            return (
+                <NavLink
+                    key={link.label}
+                    to={link.to}
+                    end={link.to === '/'}
+                    onClick={link.id === 'home' ? handleHomeClick : closeMobileMenu}
+                    className={getClassName}
+                >
+                    {link.label}
+                </NavLink>
+            );
+        });
     };
 
     return (
@@ -41,43 +91,41 @@ function Navbar({ activeSection }) {
                         {navLinks.map((link) => {
                             const isHashLink = link.to.startsWith('/#');
 
+                            // Logika ini sekarang berlaku untuk SEMUA link
+                            const classNameLogic = ({ isActive }) => {
+                                const base = "font-semibold transition duration-300 text-sm tracking-wider";
+                                const active = "text-red-600";
+                                const inactive = "text-slate-700 hover:text-red-600";
+
+                                // Kondisi aktif baru yang lebih akurat
+                                let isLinkActive = isActive;
+                                if (location.pathname === '/') {
+                                    isLinkActive = activeSection === link.id;
+                                }
+
+                                return `${base} ${isLinkActive ? active : inactive}`;
+                            };
+
                             if (isHashLink) {
                                 return (
                                     <HashLink
                                         key={link.label}
                                         to={link.to}
                                         smooth
-                                        className={`font-semibold transition duration-300 text-sm tracking-wider ${activeSection === link.id ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
-                                            }`}
+                                        className={classNameLogic({ isActive: false })}
                                     >
                                         {link.label}
                                     </HashLink>
                                 );
                             }
 
-
-                            if (link.id === 'home') {
-                                return (
-                                    <NavLink
-                                        key={link.label}
-                                        to={link.to}
-                                        onClick={handleHomeClick}
-                                        className={`font-semibold transition duration-300 text-sm tracking-wider ${activeSection === 'home' ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
-                                            }`}
-                                    >
-                                        {link.label}
-                                    </NavLink>
-                                )
-                            }
-
                             return (
                                 <NavLink
                                     key={link.label}
                                     to={link.to}
-                                    className={({ isActive }) =>
-                                        `font-semibold transition duration-300 text-sm tracking-wider ${isActive ? 'text-red-600' : 'text-slate-700 hover:text-red-600'
-                                        }`
-                                    }
+                                    end={link.to === '/'} // Prop 'end' hanya untuk link Home
+                                    onClick={link.id === 'home' ? handleHomeClick : undefined}
+                                    className={classNameLogic}
                                 >
                                     {link.label}
                                 </NavLink>
@@ -85,34 +133,53 @@ function Navbar({ activeSection }) {
                         })}
                     </div>
 
+                    {/* Tombol Hamburger */}
                     <div className="md:hidden flex items-center">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-slate-800 focus:outline-none"
-                            aria-label="Toggle Menu"
-                        >
+                        <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu" className="text-slate-800 focus:outline-none">
                             {isOpen ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
                             )}
                         </button>
                     </div>
                 </div>
             </div>
 
+
             {isOpen && (
-                <div className="md:hidden pb-4 px-5">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.label}
-                            to={link.to}
-                            onClick={() => setIsOpen(false)}
-                            className="block py-2 text-slate-700 font-semibold hover:text-red-600"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                <div className="md:hidden pb-4 px-5 flex flex-col items-start space-y-1">
+                    {navLinks.map((link) => {
+                        const isHashLink = link.to.startsWith('/#');
+
+                        // Menggunakan logika yang 100% SAMA dengan desktop
+                        const classNameLogic = ({ isActive }) => {
+                            const base = "font-semibold transition duration-300 text-sm tracking-wider block py-2"; // tambah 'block py-2' untuk mobile
+                            const active = "text-red-600";
+                            const inactive = "text-slate-700 hover:text-red-600";
+
+                            let isLinkActive = isActive;
+                            if (location.pathname === '/') {
+                                isLinkActive = activeSection === link.id;
+                            }
+
+                            return `${base} ${isLinkActive ? active : inactive}`;
+                        };
+
+                        if (isHashLink) {
+                            return (
+                                <HashLink key={link.label} to={link.to} smooth onClick={closeMobileMenu} className={classNameLogic({ isActive: false })}>
+                                    {link.label}
+                                </HashLink>
+                            );
+                        }
+
+                        return (
+                            <NavLink key={link.label} to={link.to} end={link.to === '/'} onClick={link.id === 'home' ? handleHomeClick : closeMobileMenu} className={classNameLogic}>
+                                {link.label}
+                            </NavLink>
+                        );
+                    })}
                 </div>
             )}
         </nav>

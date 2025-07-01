@@ -28,7 +28,7 @@ function ContactPage() {
                             </div>
                             <div>
                                 <h4 className="font-semibold text-slate-700">Email</h4>
-                                <a href="mailto:info@akcayaphoto.com" className="text-red-600 hover:underline">info@akcayaphoto.com</a>
+                                <a href="mailto:akcayaphoto@gmail.com" className="text-red-600 hover:underline">akcayaphoto@gmail.com</a>
                             </div>
                         </div>
                         <div className="flex items-center space-x-4">

@@ -1,21 +1,18 @@
 import React from 'react';
-import logo from '../assets/Akcaya.png'; // Pastikan path logo ini benar
+import logo from '../assets/Akcaya.png';
 
 function Hero() {
     return (
-        // Menggunakan `id` agar Navbar bisa menunjuk ke sini
+
         <section
             id="home"
             className="w-full h-[calc(100vh-4rem)] flex items-center mt-10 md:mt-0 p-5 md:p-10"
         >
             {/* Container utama untuk membatasi lebar dan menengahkan konten */}
             <div className="container mx-auto max-w-6xl">
-                {/* Flex container untuk layout 2 kolom */}
-                {/* responsive: tumpuk di layar kecil, berdampingan di layar medium ke atas (md:) */}
                 <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-16">
 
                     {/* 1. Bagian Teks (di kiri) */}
-                    {/* responsive: teks rata tengah di mobile, rata kiri di layar besar */}
                     <div className="md:flex-1 text-center md:text-left">
                         <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-4">
                             Akcaya Photo

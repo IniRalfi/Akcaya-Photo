@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import PhotoDetailModal from '../components/PhotoDetailModal';
 
 function GalleryPage() {
-    // State untuk menyimpan daftar foto, status loading, dan kemungkinan error
+
     const [photos, setPhotos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
