@@ -10,14 +10,14 @@ function Hero() {
         >
             {/* Container utama untuk membatasi lebar dan menengahkan konten */}
             <div className="container mx-auto max-w-6xl">
-                <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-16">
+                <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-96">
 
                     {/* 1. Bagian Teks (di kiri) */}
                     <div className="md:flex-1 text-center md:text-left">
-                        <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-4">
+                        <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-2">
                             Akcaya Photo
                         </h1>
-                        <p className="text-sm md:text-base text-slate-500 mt-4 mb-8 max-w-xl mx-auto md:mx-0">
+                        <p className="text-sm md:text-base text-slate-500 mt-2 mb-8 max-w-xl mx-auto md:mx-0">
                             Ini adalah website portofolio komunitas kami, sebuah ruang untuk menampilkan karya-karya terbaik dari setiap anggota.
                         </p>
                         <p className=" text-lg md:text-xl text-slate-600 mb-8">
@@ -36,7 +36,7 @@ function Hero() {
                         <img
                             src={logo}
                             alt="Logo Akcaya Photo"
-                            className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-full shadow-2xl"
+                            className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-full shadow-2xl"
                         />
                     </div>
 
