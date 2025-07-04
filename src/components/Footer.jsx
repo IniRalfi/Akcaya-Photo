@@ -6,7 +6,7 @@ const socialLinks = [
         href: 'https://instagram.com',
         label: 'Instagram',
         icon: (
-            <img src={instagram} alt="Instagram" className='h-6 md:h-8 w-full invert' />
+            <img src={instagram} alt="Instagram" className='h-6 md:h-8 w-auto invert' />
         ),
     },
 ];
