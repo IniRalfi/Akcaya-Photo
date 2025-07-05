@@ -1,0 +1,29 @@
+[
+   {
+      "id": 1,
+      "judulFoto": "Senja di Khatulistiwa",
+      "fotografer": "R",
+      "deskripsiFoto": "Pemandangan matahari terbenam yang dramatis di atas Sungai Kapuas, menangkap siluet kota dengan warna-warni langit yang hangat.",
+      "kamera": "Sony A7 III + 50mm f/1.8",
+      "tags": "senja, lanskap, jingga, kota, sungai",
+      "urlGambar": "https://res.cloudinary.com/dqm8vdp4k/image/upload/v1751247659/samples/coffee.jpg"
+   },
+   {
+      "id": 2,
+      "judulFoto": "Wajah di Balik Lensa",
+      "fotografer": "F",
+      "deskripsiFoto": "Sebuah potret close-up yang intens, menonjolkan ekspresi dan detail karakter subjek dalam format hitam putih.",
+      "kamera": "Canon EOS R",
+      "tags": "potret, hitamputih, close-up, studio",
+      "urlGambar": "https://res.cloudinary.com/dqm8vdp4k/image/upload/v1751247659/samples/upscale-face-1.jpg"
+   },
+   {
+      "id": 3,
+      "judulFoto": "Embun Pagi",
+      "fotografer": "R",
+      "deskripsiFoto": "Detail makro dari tetesan embun di atas jaring laba-laba, memperlihatkan keindahan alam yang seringkali terlewatkan.",
+      "kamera": "Nikon Z6 II + 105mm Macro",
+      "tags": "makro, alam, embun, pagi",
+      "urlGambar": "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_1280/sample.jpg"
+   }
+]

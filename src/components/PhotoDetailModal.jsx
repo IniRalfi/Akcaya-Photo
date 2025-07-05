@@ -6,7 +6,7 @@ function PhotoDetailModal({ photo, onClose }) {
 
     const tags = photo.tags ? photo.tags.split(',').map(tag => tag.trim()) : [];
     const getOptimizedDetailUrl = (url) => {
-        if (!url || !url.includes('/upload/')) return photo.url_gambar;
+        if (!url || !url.includes('/upload/')) return photo.urlGambar;
         return url.replace('/upload/', '/upload/f_auto,q_auto,w_1280/');
     };
     return (
@@ -23,8 +23,8 @@ function PhotoDetailModal({ photo, onClose }) {
                 {/* Kolom Kiri: Gambar */}
                 <div className="bg-slate-100 flex items-center justify-center">
                     <img
-                        src={getOptimizedDetailUrl(photo.url_gambar)}
-                        alt={photo.judul_foto}
+                        src={getOptimizedDetailUrl(photo.urlGambar)}
+                        alt={photo.judulFoto}
                         loading="lazy"
                         className="w-full h-full object-contain max-h-[90vh]"
                     />
@@ -32,10 +32,10 @@ function PhotoDetailModal({ photo, onClose }) {
 
                 {/* Kolom Kanan: Detail Foto */}
                 <div className="p-6">
-                    <h2 className="text-3xl font-bold text-slate-800 mb-2">{photo.judul_foto}</h2>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-2">{photo.judulFoto}</h2>
                     <p className="text-slate-500 mb-2">oleh {photo.fotografer}</p>
 
-                    <p className="text-slate-700 font-light mb-6 text-sm">{photo.deskripsi_foto}</p>
+                    <p className="text-slate-700 font-light mb-6 text-sm">{photo.deskripsiFoto}</p>
 
                     <div className="space-y-3 text-sm">
                         <div className="flex items-center">
